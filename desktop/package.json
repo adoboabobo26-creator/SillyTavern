@@ -1,12 +1,12 @@
 {
   "name": "sillytavern-desktop",
   "version": "1.0.0",
-  "description": "Standalone desktop window for SillyTavern",
+  "description": "Standalone desktop window for CrushChatter",
   "main": "main.js",
   "private": true,
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . SillyTavern --platform=win32 --arch=x64 --out=dist --overwrite --icon=../public/st.ico"
+    "build": "electron-packager . CrushChatter --platform=win32 --arch=x64 --out=dist --overwrite --icon=../public/st.ico"
   },
   "devDependencies": {
     "@electron/packager": "^18.3.0",

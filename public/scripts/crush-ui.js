@@ -141,7 +141,7 @@ function buildDiscover() {
         <section id="crush-discover" aria-label="Discover characters">
             <div class="crush-scroll">
                 <header class="crush-top">
-                    <div class="crush-logo"><i class="fa-solid fa-masks-theater"></i><span>SillyTavern</span></div>
+                    <div class="crush-logo"><img src="img/logo.png" alt=""><span>CrushChatter</span></div>
                     <label class="crush-search"><i class="fa-solid fa-magnifying-glass"></i>
                         <input type="search" placeholder="Search characters, tags…" autocomplete="off"></label>
                     <button type="button" class="crush-connect" title="Connect an AI to start chatting">

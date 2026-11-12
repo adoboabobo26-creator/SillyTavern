@@ -1,5 +1,5 @@
-// SillyTavern desktop shell: starts the local SillyTavern server and shows it in its own window.
-// The exe built from this folder expects to live inside (or beside) the SillyTavern folder it launches.
+// CrushChatter desktop shell: starts the local CrushChatter (SillyTavern-based) server and shows it in its own window.
+// The exe built from this folder expects to live inside (or beside) the CrushChatter folder it launches.
 const { app, BrowserWindow, shell, dialog } = require('electron');
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
@@ -44,13 +44,13 @@ async function waitForServer(limitMs = 180000) {
 }
 
 const loadingPage = 'data:text/html;charset=utf-8,' + encodeURIComponent(`<body style="margin:0;height:100vh;display:grid;place-items:center;background:#0f0b1a;color:#f4effc;font-family:Segoe UI,sans-serif">
-<div style="text-align:center"><div style="font-size:30px;font-weight:800;background:linear-gradient(135deg,#ff4d8d,#8b5cf6);-webkit-background-clip:text;color:transparent">SillyTavern</div>
+<div style="text-align:center"><div style="font-size:30px;font-weight:800;background:linear-gradient(135deg,#ff4d8d,#8b5cf6);-webkit-background-clip:text;color:transparent">CrushChatter</div>
 <p style="color:#a095bd">Starting up… the first launch can take a minute.</p></div></body>`);
 
 async function start() {
     const root = findRoot();
     if (!root) {
-        dialog.showErrorBox('SillyTavern not found', 'Keep this app inside your SillyTavern folder (or set SILLYTAVERN_DIR).');
+        dialog.showErrorBox('CrushChatter not found', 'Keep this app inside your CrushChatter folder (or set SILLYTAVERN_DIR).');
         return app.quit();
     }
     if (!fs.existsSync(path.join(root, 'node_modules'))) {
@@ -60,7 +60,7 @@ async function start() {
 
     win = new BrowserWindow({
         width: 1400, height: 900, minWidth: 420, minHeight: 600, backgroundColor: '#0f0b1a',
-        title: 'SillyTavern', autoHideMenuBar: true,
+        title: 'CrushChatter', autoHideMenuBar: true,
         icon: path.join(root, 'public', 'st.ico'),
     });
     win.loadURL(loadingPage);
@@ -68,10 +68,10 @@ async function start() {
     win.on('closed', () => { win = null; });
 
     if (!(await ping())) {
-        // Electron's built-in Node lacks crypto features SillyTavern needs, so use the Node.js installed on this PC.
+        // Electron's built-in Node lacks crypto features the server needs, so use the Node.js installed on this PC.
         server = spawn('node', ['server.js', '--port', String(PORT), '--listen', 'false'], { cwd: root, windowsHide: true });
         server.on('error', err => {
-            dialog.showErrorBox('Node.js not found', `SillyTavern needs Node.js (nodejs.org). ${err.message}`);
+            dialog.showErrorBox('Node.js not found', `CrushChatter needs Node.js (nodejs.org). ${err.message}`);
             app.quit();
         });
         server.stdout.on('data', d => process.stdout.write(d));
@@ -80,7 +80,7 @@ async function start() {
 
     if (await waitForServer()) win?.loadURL(URL);
     else {
-        dialog.showErrorBox('SillyTavern did not start', `The server did not come up on ${URL}.\nTry running "node server.js" in ${root} to see the error.`);
+        dialog.showErrorBox('CrushChatter did not start', `The server did not come up on ${URL}.\nTry running "node server.js" in ${root} to see the error.`);
         app.quit();
     }
 }

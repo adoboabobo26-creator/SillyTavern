@@ -101,6 +101,7 @@ body.crush-ui.crush-discover-open #crush-discover {
 .crush-scroll { height: 100%; overflow-y: auto; padding: 0 28px 40px; }
 .crush-top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 14px; padding: 16px 0; background: linear-gradient(var(--crush-bg) 70%, transparent); }
 .crush-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; white-space: nowrap; }
+.crush-logo img { width: 34px; height: 34px; }
 .crush-logo i { background: var(--crush-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .crush-search { flex: 1; display: flex; align-items: center; gap: 10px; padding: 0 16px; height: 44px; border-radius: 22px; background: var(--crush-surface); border: 1px solid var(--crush-border); color: var(--crush-muted); }
 .crush-search:focus-within { border-color: var(--crush-accent-2); }
