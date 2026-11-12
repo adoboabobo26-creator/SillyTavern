@@ -336,6 +336,10 @@
         "type": "openai_preset"
     },
     {
+        "filename": "presets/openai/Adult Roleplay Core.json",
+        "type": "openai_preset"
+    },
+    {
         "filename": "presets/context/Adventure.json",
         "type": "context"
     },
