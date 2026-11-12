@@ -2,7 +2,7 @@
 // Adds a navigation rail and a character-discovery home screen on top of the existing
 // DOM. It never replaces core elements, so every ST feature keeps working.
 import { getContext } from './st-context.js';
-import { getThumbnailUrl, selectCharacterById, default_avatar } from '../script.js';
+import { selectCharacterById, default_avatar } from '../script.js';
 import { tags, tag_map } from './tags.js';
 
 const $ = window.jQuery;
@@ -66,7 +66,8 @@ function blurb(char) {
 }
 
 function thumb(char) {
-    return char.avatar && char.avatar !== 'none' ? getThumbnailUrl('avatar', char.avatar) : default_avatar;
+    // Full-size avatar: ST's built-in thumbnails are tiny and look blurry at card size.
+    return char.avatar && char.avatar !== 'none' ? `characters/${encodeURIComponent(char.avatar)}` : default_avatar;
 }
 
 function visibleCharacters() {

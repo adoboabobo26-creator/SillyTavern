@@ -120,6 +120,30 @@
         "type": "character"
     },
     {
+        "filename": "Mira_Voss.png",
+        "type": "character"
+    },
+    {
+        "filename": "Kai_Barista.png",
+        "type": "character"
+    },
+    {
+        "filename": "Professor_Thorn.png",
+        "type": "character"
+    },
+    {
+        "filename": "Nyx.png",
+        "type": "character"
+    },
+    {
+        "filename": "Rowan_Ranger.png",
+        "type": "character"
+    },
+    {
+        "filename": "Pip_Fox.png",
+        "type": "character"
+    },
+    {
         "filename": "Seraphina",
         "type": "sprites"
     },
