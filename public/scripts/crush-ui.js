@@ -146,6 +146,7 @@ function buildDiscover() {
                         <input type="search" placeholder="Search characters, tags…" autocomplete="off"></label>
                     <button type="button" class="crush-connect" title="Connect an AI to start chatting">
                         <i class="fa-solid fa-plug"></i><span>Connect AI</span></button>
+                    <button type="button" class="crush-import-btn" title="Import a bot from Chub, JannyAI, Pygmalion or RisuAI by URL"><i class="fa-solid fa-cloud-arrow-down"></i><span>Import</span></button>
                     <button type="button" class="crush-create-btn"><i class="fa-solid fa-plus"></i><span>Create</span></button>
                 </header>
                 <div class="crush-hero">
@@ -182,6 +183,7 @@ function buildDiscover() {
         const list = visibleCharacters();
         if (list.length) root.find(`.crush-grid .crush-card[data-chid="${list[Math.floor(Math.random() * list.length)].id}"]`).trigger('click');
     });
+    root.on('click', '.crush-import-btn', () => $('#external_import_button').trigger('click'));
     root.on('click', '.crush-connect', () => openDrawer('#sys-settings-button'));
     root.on('click', '.crush-create-btn, .crush-empty-create', e => { e.preventDefault(); createCharacter(); });
     $('body').append(root);
