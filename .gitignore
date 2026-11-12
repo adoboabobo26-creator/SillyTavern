@@ -62,3 +62,7 @@ test-results/
 
 # personal bot lists / downloaded cards (never commit)
 my-bots*.txt
+
+# desktop app build output
+desktop/node_modules/
+desktop/dist/
