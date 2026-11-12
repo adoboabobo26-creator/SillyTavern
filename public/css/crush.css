@@ -1,0 +1,185 @@
+/* Friendly "Discover + Chat" theme. Scoped to body.crush-ui so removing the class restores stock ST. */
+body.crush-ui {
+    --crush-bg: #0f0b1a;
+    --crush-surface: #1a1428;
+    --crush-surface-2: #251c38;
+    --crush-border: rgba(255, 255, 255, 0.08);
+    --crush-text: #f4effc;
+    --crush-muted: #a095bd;
+    --crush-accent: #ff4d8d;
+    --crush-accent-2: #8b5cf6;
+    --crush-grad: linear-gradient(135deg, var(--crush-accent), var(--crush-accent-2));
+    --crush-rail: 76px;
+    --crush-radius: 18px;
+    --topBarBlockSize: 0px;
+    background-color: var(--crush-bg);
+    color: var(--crush-text);
+}
+
+/* ---------- hide stock top bar (drawers stay in DOM and are opened by the rail) ---------- */
+body.crush-ui #top-bar { display: none; }
+body.crush-ui #top-settings-holder { position: fixed; top: 0; left: 0; height: 0; width: 0; z-index: 3005; }
+body.crush-ui #top-settings-holder .drawer-toggle { position: absolute; width: 0; height: 0; overflow: hidden; opacity: 0; pointer-events: none; }
+body.crush-ui #top-settings-holder .drawer { width: 0; }
+body.crush-ui .drawer-content { background: var(--crush-surface); border-color: var(--crush-border); border-radius: var(--crush-radius); color: var(--crush-text); }
+body.crush-ui .fillLeft { left: var(--crush-rail); width: min(460px, calc(100vw - var(--crush-rail))); }
+body.crush-ui .fillRight { left: auto; right: 0; width: min(460px, calc(100vw - var(--crush-rail))); }
+body.crush-ui .menu_button, body.crush-ui .right_menu_button { border-radius: 12px; }
+body.crush-ui .text_pole, body.crush-ui select, body.crush-ui textarea { border-radius: 12px; background: var(--crush-surface-2); border-color: var(--crush-border); }
+body.crush-ui .popup { border-radius: var(--crush-radius); background: var(--crush-surface); border: 1px solid var(--crush-border); }
+
+/* ---------- navigation rail ---------- */
+#crush-rail, #crush-more { display: none; }
+body.crush-ui #crush-rail {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    position: fixed; z-index: 3100; top: 0; bottom: 0; left: 0; width: var(--crush-rail);
+    padding: 14px 8px; background: var(--crush-surface); border-right: 1px solid var(--crush-border);
+}
+.crush-rail-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%;
+    padding: 10px 0; border: 0; border-radius: 14px; background: transparent;
+    color: var(--crush-muted); font: inherit; font-size: 11px; cursor: pointer; transition: .15s;
+}
+.crush-rail-btn i { font-size: 20px; }
+.crush-rail-btn:hover { background: var(--crush-surface-2); color: var(--crush-text); }
+.crush-rail-btn.active { color: #fff; background: var(--crush-grad); box-shadow: 0 6px 18px rgba(255, 77, 141, .3); }
+.crush-rail-btn[data-id="more"] { margin-top: auto; }
+body.crush-ui #crush-more:not(.displayNone) {
+    display: flex; flex-direction: column; position: fixed; z-index: 3200; left: calc(var(--crush-rail) + 8px); bottom: 12px;
+    min-width: 230px; padding: 8px; background: var(--crush-surface-2); border: 1px solid var(--crush-border);
+    border-radius: var(--crush-radius); box-shadow: 0 16px 40px rgba(0, 0, 0, .5);
+}
+#crush-more button {
+    display: flex; align-items: center; gap: 12px; padding: 11px 12px; border: 0; border-radius: 12px;
+    background: transparent; color: var(--crush-text); font: inherit; text-align: left; cursor: pointer;
+}
+#crush-more button:hover { background: rgba(255, 255, 255, .07); }
+#crush-more i { width: 20px; text-align: center; color: var(--crush-accent); }
+
+/* ---------- chat screen ---------- */
+body.crush-ui #sheld {
+    top: 0; left: var(--crush-rail); right: 0; width: auto; max-width: 900px; margin: 0 auto;
+    height: 100dvh; max-height: 100dvh; background: transparent; border: 0; box-shadow: none;
+}
+body.crush-ui #sheldheader { display: none; }
+body.crush-ui #chat { max-height: none; flex: 1; background: transparent; backdrop-filter: none; padding: 18px 12px 8px; }
+body.crush-ui #form_sheld { padding: 0 12px 14px; }
+body.crush-ui #send_form {
+    border: 1px solid var(--crush-border) !important; border-radius: 26px !important; background: var(--crush-surface) !important;
+    padding: 4px 8px; box-shadow: 0 8px 30px rgba(0, 0, 0, .35); backdrop-filter: none;
+}
+body.crush-ui #send_form:focus-within { border-color: var(--crush-accent); }
+body.crush-ui #send_textarea { color: var(--crush-text); background: transparent !important; border: 0 !important; box-shadow: none !important; border-radius: 0; resize: none; }
+body.crush-ui #leftSendForm, body.crush-ui #rightSendForm { color: var(--crush-muted); }
+body.crush-ui #send_but {
+    display: flex; align-items: center; justify-content: center; width: 38px; height: 38px;
+    border-radius: 50%; background: var(--crush-grad); color: #fff; font-size: 16px;
+}
+body.crush-ui #send_but.displayNone { display: none; }
+
+/* bubbles */
+body.crush-ui #chat .mes {
+    margin: 6px 0; padding: 12px 14px; border: 0; border-radius: 20px; max-width: 88%;
+    background: var(--crush-surface); box-shadow: none; width: fit-content; min-width: 40%;
+}
+body.crush-ui #chat .mes[is_user="true"] { margin-left: auto; background: linear-gradient(135deg, rgba(255, 77, 141, .28), rgba(139, 92, 246, .32)); }
+body.crush-ui #chat .mes .avatar, body.crush-ui #chat .mes .avatar img { border-radius: 50%; width: 42px; height: 42px; object-fit: cover; box-shadow: none; }
+body.crush-ui #chat .mes .name_text { font-weight: 700; color: var(--crush-text); }
+body.crush-ui #chat .mes .mes_text { line-height: 1.6; color: var(--crush-text); }
+body.crush-ui #chat .mes .mes_text q, body.crush-ui #chat .mes .mes_text em { color: #ffc2dc; }
+body.crush-ui #chat .mes .timestamp, body.crush-ui #chat .mes .mesIDDisplay, body.crush-ui #chat .mes .mes_timer, body.crush-ui #chat .mes .tokenCounterDisplay { opacity: .45; font-size: 11px; }
+body.crush-ui #chat .mes .mes_buttons { opacity: .55; }
+body.crush-ui #chat .mes:hover .mes_buttons { opacity: 1; }
+body.crush-ui .last_mes .swipe_right, body.crush-ui .last_mes .swipe_left { opacity: .7; }
+
+/* ---------- discover ---------- */
+#crush-discover { display: none; }
+body.crush-ui.crush-discover-open #crush-discover {
+    display: block; position: fixed; z-index: 2000; inset: 0 0 0 var(--crush-rail);
+    background: radial-gradient(1200px 500px at 70% -10%, rgba(139, 92, 246, .22), transparent 60%), var(--crush-bg);
+}
+.crush-scroll { height: 100%; overflow-y: auto; padding: 0 28px 40px; }
+.crush-top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 14px; padding: 16px 0; background: linear-gradient(var(--crush-bg) 70%, transparent); }
+.crush-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; white-space: nowrap; }
+.crush-logo i { background: var(--crush-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.crush-search { flex: 1; display: flex; align-items: center; gap: 10px; padding: 0 16px; height: 44px; border-radius: 22px; background: var(--crush-surface); border: 1px solid var(--crush-border); color: var(--crush-muted); }
+.crush-search:focus-within { border-color: var(--crush-accent-2); }
+.crush-search input { flex: 1; background: transparent; border: 0; outline: 0; color: var(--crush-text); font: inherit; box-shadow: none; }
+.crush-create-btn, .crush-connect, .crush-surprise {
+    display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border: 0; border-radius: 22px;
+    font: inherit; font-weight: 600; color: #fff; cursor: pointer; white-space: nowrap;
+}
+.crush-create-btn, .crush-surprise { background: var(--crush-grad); }
+.crush-connect { background: var(--crush-surface-2); border: 1px solid #f59e0b; color: #fbbf24; }
+body.crush-connected .crush-connect { display: none; }
+.crush-hero { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 8px 0 20px; padding: 28px 32px; border-radius: 24px; background: linear-gradient(120deg, rgba(255, 77, 141, .35), rgba(139, 92, 246, .35)), var(--crush-surface); border: 1px solid var(--crush-border); }
+.crush-hero h1 { margin: 0 0 6px; font-size: clamp(22px, 3.2vw, 34px); font-weight: 800; }
+.crush-hero em { font-style: normal; background: var(--crush-grad); -webkit-background-clip: text; background-clip: text; color: transparent; filter: brightness(1.3); }
+.crush-hero p { margin: 0; color: #d9cff0; }
+.crush-chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 14px; scrollbar-width: none; }
+.crush-chip { flex: none; padding: 8px 16px; border-radius: 20px; border: 1px solid var(--crush-border); background: var(--crush-surface); color: var(--crush-muted); font: inherit; cursor: pointer; transition: .15s; }
+.crush-chip:hover { color: var(--crush-text); }
+.crush-chip.active { background: var(--crush-grad); border-color: transparent; color: #fff; }
+.crush-section-head, .crush-recent h2 { display: flex; align-items: center; justify-content: space-between; margin: 18px 0 12px; }
+.crush-section-head h2, .crush-recent h2 { margin: 0; font-size: 18px; font-weight: 700; }
+.crush-recent { margin-bottom: 6px; }
+.crush-recent h2 { margin-bottom: 12px; }
+.crush-count { color: var(--crush-muted); font-weight: 400; font-size: 13px; margin-left: 6px; }
+.crush-sort { width: auto; height: 38px; padding: 0 12px; }
+.crush-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
+.crush-row { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; }
+.crush-row .crush-card { flex: none; width: 170px; }
+.crush-card {
+    position: relative; display: block; padding: 0; aspect-ratio: 3 / 4; overflow: hidden; border: 1px solid var(--crush-border);
+    border-radius: var(--crush-radius); background: var(--crush-surface); color: var(--crush-text); text-align: left; cursor: pointer;
+    transition: transform .18s, box-shadow .18s, border-color .18s; font: inherit;
+}
+.crush-card:hover, .crush-card:focus-visible { transform: translateY(-4px); border-color: var(--crush-accent); box-shadow: 0 14px 34px rgba(255, 77, 141, .22); outline: 0; }
+.crush-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.crush-card-info { position: absolute; inset: auto 0 0 0; padding: 40px 14px 14px; background: linear-gradient(transparent, rgba(8, 5, 16, .92) 55%); }
+.crush-card-name { font-weight: 700; font-size: 16px; text-shadow: 0 1px 4px #000; }
+.crush-card-desc { margin-top: 4px; font-size: 12px; line-height: 1.4; color: #d3c9e8; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.crush-card-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.crush-card-tags span { padding: 2px 9px; border-radius: 10px; font-size: 11px; background: rgba(255, 255, 255, .14); backdrop-filter: blur(6px); }
+.crush-fav { position: absolute; top: 10px; right: 10px; color: var(--crush-accent); filter: drop-shadow(0 1px 3px #000); }
+.crush-empty { display: none; padding: 60px 0; text-align: center; color: var(--crush-muted); }
+.crush-empty a { color: var(--crush-accent); }
+
+/* ---------- mobile: rail becomes a bottom tab bar ---------- */
+@media (max-width: 800px) {
+    body.crush-ui { --crush-rail: 0px; }
+    body.crush-ui #crush-rail {
+        top: calc(100dvh - 62px); bottom: auto; right: 0; width: auto; height: 62px; flex-direction: row; justify-content: space-around; padding: 6px 4px;
+        border-right: 0; border-top: 1px solid var(--crush-border);
+    }
+    .crush-rail-btn { padding: 6px 0; flex: 1; }
+    .crush-rail-btn[data-id="more"] { margin-top: 0; }
+    body.crush-ui #crush-more:not(.displayNone) { left: 10px; right: 10px; bottom: auto; top: auto; }
+    body.crush-ui #crush-more:not(.displayNone) { top: auto; bottom: auto; transform: translateY(calc(100dvh - 100% - 72px)); }
+    body.crush-ui #sheld { height: calc(100dvh - 62px); max-height: calc(100dvh - 62px); left: 0; }
+    body.crush-ui.crush-discover-open #crush-discover { bottom: auto; height: calc(100dvh - 62px); }
+    body.crush-ui .fillLeft, body.crush-ui .fillRight { width: 100vw; max-height: calc(100dvh - 62px); }
+    .crush-scroll { padding: 0 14px 30px; }
+    .crush-top { flex-wrap: wrap; }
+    .crush-logo { flex: 1; }
+    .crush-search { order: 3; flex-basis: 100%; }
+    .crush-create-btn span, .crush-connect span { display: none; }
+    .crush-create-btn, .crush-connect { padding: 0 14px; }
+    .crush-hero { flex-direction: column; align-items: flex-start; padding: 20px; }
+    .crush-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+}
+
+/* ---------- settings panels (stock drawers) open as tidy side sheets beside the rail ---------- */
+body.crush-ui #top-settings-holder .drawer-content:not(.fillLeft):not(.fillRight) {
+    position: fixed !important; top: 14px !important; left: calc(var(--crush-rail) + 14px) !important; right: auto !important;
+    width: min(620px, calc(100vw - var(--crush-rail) - 28px)) !important; min-width: 0 !important;
+    max-height: calc(100dvh - 28px) !important; margin: 0 !important; box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+}
+@media (max-width: 800px) {
+    body.crush-ui #top-settings-holder .drawer-content:not(.fillLeft):not(.fillRight) {
+        top: 0 !important; left: 0 !important; width: 100vw !important; max-height: calc(100dvh - 62px) !important; border-radius: 0;
+    }
+}
+
+/* Discover owns the screen while open; the stock chat container must not overlap or intercept it (mobile stacks it higher). */
+body.crush-ui.crush-discover-open #sheld { visibility: hidden; pointer-events: none; }
